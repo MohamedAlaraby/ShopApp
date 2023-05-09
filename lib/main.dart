@@ -1,11 +1,14 @@
-import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/layout/cubit/cubit.dart';
+import 'package:shop_app/layout/cubit/states.dart';
 import 'package:shop_app/layout/shop_layout.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/modules/on_boarding/on_boarding_screen.dart';
 import 'package:shop_app/shared/bloc_observer.dart';
-import 'package:shop_app/shared/components.dart';
+import 'package:shop_app/shared/constants.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/themes.dart';
@@ -17,7 +20,7 @@ void main() async{
   await CacheHelper.init();
 
   bool? onBoarding= CacheHelper.getData(key: 'onBoarding');
-  String? token= CacheHelper.getData(key: 'token');
+  token = CacheHelper.getData(key: 'token');
 
   Widget? widget;
   if(onBoarding != null){
@@ -44,13 +47,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-      debugShowCheckedModeBanner:false ,
-      title: 'Salla',
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      themeMode: ThemeMode.light,
-       home:startingWidget,
+    return BlocProvider(
+      create: (context) => ShopCubit()..getHomeData(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner:false ,
+        title: 'Salla',
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.light,
+         home:startingWidget,
+      ),
     );
   }
 }

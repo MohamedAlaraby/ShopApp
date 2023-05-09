@@ -62,7 +62,7 @@ ThemeData lightTheme=ThemeData(
     backgroundColor: Colors.white,
   ),
   textTheme: const TextTheme(
-    bodyText1: TextStyle(
+   bodyLarge:TextStyle(
       color: Colors.black,
       fontSize: 15.0,
       fontWeight: FontWeight.w600,
