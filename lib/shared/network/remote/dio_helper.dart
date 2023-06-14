@@ -16,12 +16,12 @@ class DioHelper{
     Map <String ,dynamic>? query,
     String? lang='en',
     required String? token,
-  })async{
+    })async{
 
     dio.options.headers={
         'lang':lang,
-        'Authorization':token,
-      'Content-Type':'application/json',
+         'Authorization':token,
+         'Content-Type':'application/json',
       };
    return await dio.get(
         url!,
@@ -50,4 +50,24 @@ class DioHelper{
     );
   }
 
+
+  static Future<Response> updateData({
+    required String url,
+    Map<String,dynamic>? query,
+    required Map <String ,dynamic> data,
+    String? lang='en',
+    String? token,
+  })async{
+
+    dio.options.headers={
+      'lang':lang,
+      'Authorization':token,
+      'Content-Type':'application/json',
+    };
+    return await dio.put(
+        url,
+        queryParameters: query,
+        data:data
+    );
+  }
 }

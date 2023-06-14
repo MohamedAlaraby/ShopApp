@@ -21,9 +21,10 @@ void main() async{
 
   bool? onBoarding= CacheHelper.getData(key: 'onBoarding');
   token = CacheHelper.getData(key: 'token');
+  print("the token is :::$token");
 
-  Widget? widget;
-  if(onBoarding != null){
+    Widget? widget;
+    if(onBoarding != null){
     //this means the user saw the on boarding screen before.
         if(token != null ){
           //this means the user logged in before and didn't make log out.
@@ -34,7 +35,7 @@ void main() async{
         }
   }else{
     //this means the user didn't open the app before.
-    widget =const OnBoardingScreen();
+    widget = const OnBoardingScreen();
   }
 
   runApp(MyApp(widget));
@@ -48,9 +49,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return BlocProvider(
-      create: (context) => ShopCubit()..getHomeData(),
+      create: (context) => ShopCubit()..getHomeData()..getCategories()..getFavorites()..getUserData(),
       child: MaterialApp(
-        debugShowCheckedModeBanner:false ,
+        debugShowCheckedModeBanner:false,
         title: 'Salla',
         theme: lightTheme,
         darkTheme: darkTheme,

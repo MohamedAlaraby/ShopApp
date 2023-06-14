@@ -5,6 +5,7 @@ import 'package:shop_app/shared/network/local/cache_helper.dart';
 void signOut(context){
 
   CacheHelper.removeData(key: 'token').then((value) {
+    token="";
     navigateAndFinish(context, LoginScreen());
   });
 
@@ -16,6 +17,5 @@ void printFullText(String? text){
   });
 
 }
-//to be able to get the token from any screen in the app.
+//to be able to get the token from any screen in the app as long as the app is alive.
 String? token=' ';
-String placeHolderImage='https://student.valuxapps.com/storage/uploads/products/1615440322npwmU.71DVgBTdyLL._SL1500_.jpg';
